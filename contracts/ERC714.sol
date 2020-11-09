@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity =0.7.4;
 
 import "./SafeMath.sol";
@@ -34,6 +35,16 @@ abstract contract ERC714 is IERC714 {
         _;
     }
 
+    function transfer(address to, uint256 value) override public returns (bool) {
+        require(value <= _balances[msg.sender]);
+        require(to != address(0));
+
+        _balances[msg.sender] = _balances[msg.sender].sub(value);
+        _balances[to] = _balances[to].add(value);
+        emit Transfer(msg.sender, to, value);
+        return true;
+  }
+
     function approve(address _spender, uint256 _value) override public returns (bool) {
         require(_spender != address(0));
         require(_value <= _balances[_spender]);
@@ -42,7 +53,7 @@ abstract contract ERC714 is IERC714 {
         return true;
     }
 
-    function mint(address _receiver, uint256 _amount) internal isMinting{
+    function mint(address _receiver, uint256 _amount) internal isMinting {
         //Check for valid transactions before sending. 
 
         totalSupply = totalSupply.add(_amount);
