@@ -8,18 +8,19 @@ import "./IERC714.sol";
 abstract contract ERC714 is IERC714 {
     using SafeMath for uint256;
 
-    address owner;
+    address owner; 
     
-    string public override name = "Kyle Coin";
-    string public override symbol = "KYLE";
-
-    uint256 public override totalSupply;
+    string public name = "Kyle Coin";
+    string public symbol = "KYLE";
+    
+    mapping (address => uint256) public balanceOf;
+    
+    uint public totalSupply = 7140000000;
+    
     bool public mintingFinished = false;
     
-    mapping (address => uint256) private _balances;
-
-    event Mint(address indexed to, uint256 amount);
-    event MintFinished();
+    event Approval(address indexed owner, address indexed spender, uint value);
+    event Transfer(address indexed from, address indexed to, uint value);
 
     constructor() {
         owner = msg.sender;
@@ -35,21 +36,21 @@ abstract contract ERC714 is IERC714 {
         _;
     }
 
-    function transfer(address to, uint256 value) override public returns (bool) {
-        require(value <= _balances[msg.sender]);
+    function transfer(address to, uint256 value) public returns (bool) {
+        require(value <= balanceOf[msg.sender]);
         require(to != address(0));
 
-        _balances[msg.sender] = _balances[msg.sender].sub(value);
-        _balances[to] = _balances[to].add(value);
-        emit Transfer(msg.sender, to, value);
+        balanceOf[msg.sender] = balanceOf[msg.sender].sub(value);
+        balanceOf[to] = balanceOf[to].add(value);
+       // emit Transfer(msg.sender, to, value);
         return true;
   }
 
-    function approve(address _spender, uint256 _value) override public returns (bool) {
+    function approve(address _spender, uint256 _value) public view returns (bool) {
         require(_spender != address(0));
-        require(_value <= _balances[_spender]);
+        require(_value <= balanceOf[_spender]);
 
-        emit Approval(msg.sender, _spender, _value);
+        // emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
@@ -57,7 +58,7 @@ abstract contract ERC714 is IERC714 {
         //Check for valid transactions before sending. 
 
         totalSupply = totalSupply.add(_amount);
-        _balances[_receiver].add(_amount);
+        balanceOf[_receiver].add(_amount);
 
         //Need to add check to update mintingFinished once totalSupply is reached
 
