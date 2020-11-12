@@ -8,6 +8,7 @@ Router.setProvider(
   "https://ropsten.infura.io/v3/90de6f047b6547e28b29b4b7176a5eea"
 );
 
+//Uinswap contract address that is on ropsten, mainnet, and a few others.
 var router = new Router(
   RouterABI,
   "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
