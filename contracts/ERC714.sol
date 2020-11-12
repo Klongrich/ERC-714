@@ -90,6 +90,7 @@ contract ERC714 {
     }
   
     //Hopping there is a easier way to do this
+    //I am considering doing it in the migrations part. 
     function send_to_uinswap() public returns (bool) {
           
     }
