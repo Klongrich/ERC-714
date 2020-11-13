@@ -22,8 +22,8 @@ Another way of adding trust would be making it impossible for the team to dump a
 
 ## Referral Structure
 
-There will be referral fee structures that will allow additional coins to be paid out based on how many people use a given referral code. Fees will start at 2.51% and grow depending on the amount raised from the referral. 
+There will be referral fee structures that allow additional coins to be paid out based on how many people use a given referral code. Fees will start at 2.51% and grow depending on the amount raised from the referral. 
 
 ## UI-Fee
 
-There will be a UI that will allow you to automate the creation of an ERC-714 token. However there will be a variable fee of 1% - 3% of funds raised, depending on volume, that will be paid out to our team. If you would not like to pay this fee, the ERC-714 standard is open source with a MIT license allowing anyone to use the code.
+There will be a UI that which allows you to automate the creation of an ERC-714 token. However, there will be a variable fee of 1% - 3% of funds raised, depending on volume, that will be paid out to our team. If you would not like to pay this fee, the ERC-714 standard is open source with a MIT license allowing anyone to use the code.
