@@ -26,9 +26,7 @@ var router = new Router(
 router.methods._addLiquidity();
 
 //Have to switch token to be lanuched on ropsten from either web3 wallet or local etheruem node.
-//However I don't have much storage on this linux laptop so it kind of becomes a problem
-//I'm far to lazy to update my distro.
-
+//In truffle-config or use different envoirment.
 module.exports = function (deployer) {
   deployer.deploy(Token, "0x9795D52176e5DEa38D2b27B57A0b7480032a0E0c");
 };
