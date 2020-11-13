@@ -20,10 +20,13 @@ contract ERC714 {
     //1 ETH = 1000000000000000000
     uint public supplyLimit = 900000000000000000000;
     
+    bool public payoutFinished = false;
     bool public mintingFinished = false;
     
     //30 coins for 1 ETH
     uint public price = 30;
+
+    uint public pay_out_date = block.timestamp;
     
     event Approval(address indexed owner, address indexed spender, uint value);
     event Transfer(address indexed from, address indexed to, uint value);
@@ -43,6 +46,15 @@ contract ERC714 {
     modifier onlyTeam() {
         if (msg.sender != team) {
             revert("Caller is not team");
+        }
+        _;
+    }
+
+    modifier IsPayingOut() {
+        // Change 10 ether to what paramters should be
+        // Will most likley create a standard / static choice. 
+        if (address(this).balance < 10 ether) {
+            payoutFinished = false;
         }
         _;
     }
@@ -76,12 +88,16 @@ contract ERC714 {
         return true;
     }
     
-    //Add in time stamps that would lock funds
-    //Function can only be called by team to release funds once time has passed.
-    function pay_out_to_team() public onlyTeam {
-        // if (block.timestamp < 1605061203) {
-        //     team.transfer(1 ether);
-        //  }
+    // Add in time stamps that would lock funds
+    // Function can only be called by team to release funds once time has passed.
+    // 1 hour = 3600
+    // 1 day = 86400
+    // 1 month = 2629743
+    function pay_out_to_team() public onlyTeam IsPayingOut {
+        if (block.timestamp < pay_out_date) {
+             team.transfer(1 ether);
+             pay_out_date += 2629732; // one month
+        }
          team.transfer(1 ether);
     }
 
