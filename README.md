@@ -22,7 +22,7 @@ Another way of adding trust would be making it impossible for the team to dump a
 
 ## Referral Structure
 
-There will be referral fee structures that will allow additional coins to be paid out based on how many people a given referral code. Fees will start at 2.51% and grow depending on the amount raised from the referral. 
+There will be referral fee structures that will allow additional coins to be paid out based on how many people use a given referral code. Fees will start at 2.51% and grow depending on the amount raised from the referral. 
 
 ## UI-Fee
 
