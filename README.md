@@ -2,7 +2,7 @@
 
 New token standard for pre-sales held on the ethereum block-chain.
 
-## How it works
+## How It Works
 
 This standard is an extension of the ERC20 token standard. The current standard creates a token that is distributed instantly. Instead what an ERC714 token would do is  time-lock / lock a portion of the funds raised.
 
@@ -12,7 +12,7 @@ The second lock is on the ETH the team has raised. The time of payouts can be va
 
 Also note that all locks can be changed depending on team size, investor inputs, and amount raised.
 
-## Use case
+## Use Case
 
 The goal of this standard is to provide a more secure and trusted way of raising funds via a token sale on the ethereum block-chain. 
 
@@ -20,7 +20,7 @@ One of the main ways of adding trust would be to prevent rug pull scams. This is
 
 Another way of adding trust would be making it impossible for the team to dump all the ETH they have raised into their token after the pre-sale. This would allow them to not exit / crash the price of the token they are offering overnight. 
 
-## Referral Structure.
+## Referral Structure
 
 There will be referral fee structures that will allow additional coins to be paid out based on how many people use the referral code. Fee will start at 2.51% and grow depending on the amount raised from the referral. 
 
