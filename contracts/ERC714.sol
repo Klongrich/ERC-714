@@ -54,7 +54,7 @@ contract ERC714 {
         // Change 10 ether to what paramters should be
         // Will most likley create a standard / static choice. 
         if (address(this).balance < 10 ether) {
-            payoutFinished = false;
+            payoutFinished = true;
         }
         _;
     }
@@ -98,7 +98,8 @@ contract ERC714 {
              team.transfer(1 ether);
              pay_out_date += 2629732; // one month
         }
-         team.transfer(1 ether);
+        // Here for testing.
+        team.transfer(1 ether);
     }
 
     function getTimeStamp() public view returns (uint) {
