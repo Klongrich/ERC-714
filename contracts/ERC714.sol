@@ -8,23 +8,19 @@ contract ERC714 {
     
     string public name = "Kyle Coin";
     string public symbol = "KYLE";
-    uint8 public decimals = 18;
 
     mapping (address => uint256) public balanceOf;
     
-    uint public totalSupply;
     //30 ETH limit for testing
     //1 ETH = 1000000000000000000
     uint public limit = 30000000000000000000;
     
+    uint8 public decimals = 18;
     bool public payoutFinished = false;
     bool public mintingFinished = false;
     
     //30 coins for 1 ETH
-    uint public price = 30;
-
-    //Testing new way to stop presale.
-
+    uint public presale_price = 30;
     uint public pay_out_date = block.timestamp;
     
     event Approval(address indexed owner, address indexed spender, uint value);
@@ -49,6 +45,7 @@ contract ERC714 {
         _;
     }
 
+    //Could check time frame instead of contracat balance.
     modifier IsPayingOut() {
         // Change 10 ether to what paramters should be
         // Will most likley create a standard / static choice. 
@@ -59,16 +56,18 @@ contract ERC714 {
     }
     
     receive() external payable {
-        //Gets value in wei when calling msg.value
-        //Called when ether is sent directly to the address
+        _mint(msg.sender, msg.value);
     }
     
     // Create Coins
     // limit is the total amount of ETH being raised.
-    function mint() public payable returns (bool) {
-        require(msg.sender != address(0));
+    // Need to add check that would make sure a pay out hasn't happened.
+    // This would make balance < limit and allow for more coins to be created.
+    // at the pre-sale price.
+    function _mint(address _to, uint amount) internal virtual returns (bool) {
+        require(_to != address(0));
         require(address(this).balance < limit);
-        balanceOf[msg.sender] += msg.value * price;
+        balanceOf[_to] += amount * presale_price;
         return (true);
     }
     
