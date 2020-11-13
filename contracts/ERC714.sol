@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity =0.7.4; 
 
-import "./SafeMath.sol";
-
 contract ERC714 {
-    using SafeMath for uint256;
 
     address owner; 
     address payable team;
@@ -18,13 +15,15 @@ contract ERC714 {
     uint public totalSupply;
     //30 ETH limit for testing
     //1 ETH = 1000000000000000000
-    uint public supplyLimit = 900000000000000000000;
+    uint public limit = 30000000000000000000;
     
     bool public payoutFinished = false;
     bool public mintingFinished = false;
     
     //30 coins for 1 ETH
     uint public price = 30;
+
+    //Testing new way to stop presale.
 
     uint public pay_out_date = block.timestamp;
     
@@ -64,15 +63,12 @@ contract ERC714 {
         //Called when ether is sent directly to the address
     }
     
-    //Create Coins
-    //Supply limit is the total amount of tokens they are selling
+    // Create Coins
+    // limit is the total amount of ETH being raised.
     function mint() public payable returns (bool) {
         require(msg.sender != address(0));
-        uint tokens_purchased;
-        tokens_purchased = msg.value * price;
-        require(tokens_purchased + totalSupply < supplyLimit);
-        totalSupply = totalSupply += tokens_purchased;
-        balanceOf[msg.sender] += tokens_purchased;
+        require(address(this).balance < limit);
+        balanceOf[msg.sender] += msg.value * price;
         return (true);
     }
     
@@ -84,7 +80,6 @@ contract ERC714 {
         balanceOf[msg.sender] = balanceOf[msg.sender] - value;
         balanceOf[to] = balanceOf[to] += value;
         emit Transfer(msg.sender, to, value);
-        
         return true;
     }
     
